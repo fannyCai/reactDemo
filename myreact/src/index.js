@@ -2,18 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-function formatName(user) {
-	return user.firstName + '' +user.lastName;
-}
-const user = {
-	firstName:'Hello',
-	lastName :'React'
-}
-const element = (
-	<h1>{formatName(user)}</h1>
-)
+var nameList = ['A', 'B', 'C'];
 ReactDOM.render(
-  element,
+<div>	
+ {
+ 	nameList.map(function(name){
+ 		return <div>您好，{name}</div>;
+ 	})
+ }
+ </div>,
   document.getElementById('root')
 );
 
