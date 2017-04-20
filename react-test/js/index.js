@@ -1,155 +1,181 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// function tick() {
-//   const element = (
-//     <div>
-//       <h1>您好</h1>
-//       <h2>现在是 {new Date().toLocaleTimeString()}.</h2>
-//     </div>
-//   );
-//   ReactDOM.render(
-//     element,
-//     document.getElementById('root')
-//   );
-// }
-
-// setInterval(tick, 1000);
-
-// class Welcome extends React.Component{
-// 	render() {
-// 		return <h1>{this.props.name}</h1>
-
-// 	}
-// }
-// function Welcome(props) {
-//   return <h1>Hello, {props.age}</h1>;
-// }
-
-// const element = <Welcome age="12" />;
+import LoginControl from './LoginControl';
+import Page from './Page';
+import FlavorForm from './FlavorForm';
+import Reservation from './Reservation';
 // ReactDOM.render(
-//   element,
+//   <LoginControl />,
 //   document.getElementById('root')
 // );
-// function Clock(props) {
+
+// function Mailbox(props) {
+//   const unreadMessages = props.unreadMessages;
+//   return (
+// 	<div>
+// 	  <h1>Hello!</h1>
+// 	  {unreadMessages.length > 0 &&
+// 		<h2>
+// 		  You have {unreadMessages.length} unread messages.
+// 		</h2>
+// 	  }
+// 	</div>
+//   );
+// }
+
+// const messages = ['React', 'Re: React', 'Re:Re: React'];
+// ReactDOM.render(
+//   <Mailbox unreadMessages={messages} />,
+//   document.getElementById('root')
+// );
+
+// function NumberList(props) {
+//   const numbers = props.numbers;
+//   const listItems = numbers.map((number) =>
+//     <li key={number.toString()}>{number}</li>
+//   );
+//   return (
+//     <ul>{listItems}</ul>
+//   );
+// }
+
+// const numbers = [1, 2, 3, 4, 5];
+// ReactDOM.render(
+//   <NumberList numbers={numbers} />,
+//   document.getElementById('root')
+// );
+
+// ReactDOM.render(
+//   <Page />,
+//   document.getElementById('root')
+// );
+
+// ReactDOM.render(
+//   <h1>Hello, world!</h1>,
+//   document.getElementById('root')
+// );
+// function ListItem(props) {
+//   // Correct! There is no need to specify the key here:
+//   return <li>{props.value}</li>;
+// }
+
+
+
+// function NumberList(props) {
+//   const numbers = props.numbers;
+//   return (
+//     <ul>
+//       {numbers.map((number) =>
+//         <ListItem key={number.toString()}
+//                   value={number} />
+//       )}
+//     </ul>
+//   );
+// }
+// const numbers = [1, 2, 3, 4, 5];
+// ReactDOM.render(
+//   <NumberList numbers={numbers} />,
+//   document.getElementById('root')
+// );
+// function Blog(props) {
+//   const sidebar = (
+//     <ul>
+//       {props.posts.map((post) =>
+//         <li key={post.id}>
+//           {post.title}
+//         </li>
+//       )}
+//     </ul>
+//   );
+//   const content = props.posts.map((post) =>
+//     <div key={post.id}>
+//       <h3>{post.title}</h3>
+//       <p>{post.content}</p>
+//     </div>
+//   );
 //   return (
 //     <div>
-//       <h1>Hello, world!</h1>
-//       <h2>It is {props.date.toLocaleTimeString()}.</h2>
+//       {sidebar}
+//       <hr />
+//       {content}
 //     </div>
 //   );
 // }
 
-// function tick() {
-//   ReactDOM.render(
-//     <Clock date={new Date()} />,
-//     document.getElementById('root')
-//   );
-// }
-
-// setInterval(tick, 1000);
-
-
-//2-2
-// function Clock(props) {
-// 	return (
-// 		<div>{props.data.toLocaleTimeString()}</div>
-// 	)
-// }
-// function tick() {
-// 	ReactDOM.render(
-// 		<Clock data = {new Date()}/>,
-// 		document.getElementById('root')
-
-// 	)
-// }
-
-// setInterval(tick,1000);
-// var Greeting = React.createClass({
-//   render: function() {
-//     return <h1>Hello, {this.props.name}</h1>;
-//   }
-// });
-
-// class Greeting extends React.Component {
-//   render() {
-//     return <h1>Hello, {this.props.name}</h1>;
-//   }
-// }
-
-// function FormattedDate(props) {
-//   return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
-// }
-// class Clock extends React.Component{
-	
-// 	constructor(props){
-// 		super(props);
-// 		this.state = {date: new Date()};
-// 	}
-// 	componentDidMount(){
-// 		//this.timerID = setInterval(() => this.tick(),1000)
-// 		var self = this;
-// 		this.timerID = setInterval(function(){
-// 			self.tick()
-// 		}, 1000)
-// 	}
-// 	componentWillUnmount(){
-// 		clearInterval(this.timerID)
-// 	}
-// 	tick() {
-// 		this.setState({
-// 			date: new Date()
-// 		})
-// 	}
-// 	render() {
-// 		return (
-// 			<div>
-// 				<h1>Hello, world!</h1>
-// 				<FormattedDate date={this.state.date} />
-// 			</div>
-// 		)
-// 	}
-// }
-// function App() {
-// 	return (
-// 		<div>
-// 			<Clock/>
-// 			<Clock/>
-// 			<Clock/>
-// 			<Clock/>
-// 			<Clock/>
-// 			<Clock/>
-// 		</div>
-// 	)
-// }
+// const posts = [
+//   {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+//   {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+// ];
 // ReactDOM.render(
-// 	<App />,
-// 	document.getElementById('root')
-// )
+//   <Blog posts={posts} />,
+//   document.getElementById('root')
+// );
+// class NameForm extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {value: ''};
 
-class Toggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
-    this.handleClick = this.handleClick.bind(this);
-  }
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-  }
+//   handleChange(event) {
+//     this.setState({value: event.target.value});
+//   }
 
-  render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button>
-    );
-  }
-}
+//   handleSubmit(event) {
+//     alert('A name was submitted: ' + this.state.value);
+//     event.preventDefault();
+//   }
+
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name:
+//           <input type="text" value={this.state.value} onChange={this.handleChange} />
+//         </label>
+//         <input type="submit" value="Submit" />
+//       </form>
+//     );
+//   }
+// }
+
+// class EssayForm extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       value: 'Please write an essay about your favorite DOM element.'
+//     };
+
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+
+//   handleChange(event) {
+//     this.setState({value: event.target.value});
+//   }
+
+//   handleSubmit(event) {
+//     alert('An essay was submitted: ' + this.state.value);
+//     event.preventDefault();
+//   }
+
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name:
+//           <textarea value={this.state.value} onChange={this.handleChange} />
+//         </label>
+//         <input type="submit" value="Submit" />
+//       </form>
+//     );
+//   }
+// }
+
 
 ReactDOM.render(
-  <Toggle />,
+  <Reservation />,
   document.getElementById('root')
 );
