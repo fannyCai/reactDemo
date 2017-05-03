@@ -112,6 +112,17 @@ class Calculator extends React.Component{
 					
 				});
 				break;
+			case '%':
+				this.setState({
+					show:0,
+					value: 0,
+					temp : 0,
+					num1:0,
+					per:'',
+					hasOperator: false,
+					NeedClear:false
+				});
+				break;	
 			case '←':
 				this.setState({
 					show:0,
