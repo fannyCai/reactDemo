@@ -1,172 +1,184 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-function Button(props) {
- 
-  return (
-    <ul>{listItems}</ul>
-  );
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class Button extends React.Component{
+	constructor(props) {
+		super(props);
+		this.buttonClick = this.buttonClick.bind(this);
+	}
+	buttonClick(event) {
+
+		this.props.onNumberClick(event.target.innerHTML);
+	}
+	render(){
+		return(
+			<li onClick = {this.buttonClick}>{this.props.number}</li>
+		)
+	}
+}
+class CreateButton extends React.Component{
+	constructor(props) {
+		super(props);
+	}
+	render(){
+		let liArry = ['÷','×','-','+','7','8','9','%','4','5','6','±','1','2','3','←','0','.','=','C'];
+		const liList = liArry.map((number) =>
+			<Button key={number} number={number} onNumberClick={this.props.clickButton} />
+		);
+		return(
+			<ul>{liList}</ul>
+		)
+	}
+
 }
 
-class Count extends React.Component {
-	constructor(props) {
-	    super(props);
-	    this.state = {result: 0};
-	    this.handleClick = this.handleClick.bind(this);
-	    this.parser = this.parser.bind(this);
-	    this.operate = this.operate.bind(this);
-	   
-	    this.state = {
-	      result: '0',
-	      keyboard: [
-	        {letter: '7'},
-	        {letter: '8'},
-	        {letter: '9'},
-	        {letter: '+'},
-	        {letter: '4'},
-	        {letter: '5'},
-	        {letter: '6'},
-	        {letter: '-'},
-	        {letter: '1'},
-	        {letter: '2'},
-	        {letter: '3'},
-	        {letter: '×'},
-	        {letter: '0'},
-	        {letter: 'C'},
-	        {letter: '='},
-	        {letter: '÷'}
-	      ]
-	    };
-	    this.result = 0;
-	    this.iNum1 = 0;
-	    this.iNum2 = 0;
-	    this.stack = [];
-	    this.temp = [];
-	    this.operation = null;
-	    this.bNeedClear = false;
-	    this.str ='0';
-	    this.flag = false;
-
-  }
-  operate(iNum1, iNum2, sOpr){
-  	var iResult = 0;
-  	switch(sOpr){
-  		case '×':
-			iResult=iNum1*iNum2;
-			break;
-		case '+':
-			iResult=iNum1+iNum2;
-			break;
-		case '-':
-			iResult=iNum1-iNum2;
-			break;
-		case '÷':
-			iResult=iNum1/iNum2;
-			break;
-		default:
-			iResult=iNum2;
-  	}
-  	return iResult;
-  }
- 
-  parser(char){
-  	switch(char.toString()){
-  		case '=':
-
-  			this.result = this.operate(this.iNum1,this.iNum2,this.operation);
-  			this.iNum1 = this.result;
-  			this.stack = [];
-  			this.stack.push(this.result);
-  			this.bNeedClear = true;
-  			break;
-  		case '+':
-		case '-':
-		case '×':
-		case '÷':
-			if(this.operation){
-				this.result = this.operate(this.iNum1,this.iNum2,this.operation);
-				this.iNum1 = this.result;
-				this.stack = [];
-				this.operation = char;
-  				this.stack.push(this.result);
-  				this.stack.push(this.operation);
-  				this.bNeedClear = true;
-  				
-  			} else{
-  				this.flag = true;
-				this.temp = [];
-				this.operation = char;
-
-				this.stack.push(this.operation);
-				
-  			}
-
-			
-		
-			break;
-		case 'C':
-			this.bNeedClear = false;
-			this.stack = [];
-			this.temp = [];
-			this.flag = false;
-			this.iNum1 = 0;
-			this.iNum2 = 0;
-			this.result = 0;
-			
-			this.operation = null;
-			break;
-		default:
-			if(char == 0){
-
-			}
-			if(this.bNeedClear){
-				this.stack = [];
-				this.temp = [];
-				this.iNum1 = this.result;
-				this.stack.push(char);
-				this.temp.push(char);
-				this.iNum2 = parseInt(this.temp.join(''));
-				this.bNeedClear = false;
-
-			} else {
-				this.stack.push(char);
-				this.temp.push(char);
-				if(this.flag){
-					this.iNum2 = parseInt(this.temp.join(''));
+class Calculator extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			show:0,
+			value: 0,
+			temp : 0,
+			num1:0,
+			per:'',
+			hasOperator: false,
+			NeedClear:false
+		}
+		this.handleNumberClick = this.handleNumberClick.bind(this);
+	}
+	operate(iNum1, iNum2, sOpr){
+		console.info(iNum1,iNum2,sOpr);
+		var iResult = 0;
+		switch(sOpr){
+			case '×':
+				iResult=iNum1*iNum2;
+				break;
+			case '+':
+				iResult=iNum1+iNum2;
+				break;
+			case '-':
+				iResult=iNum1-iNum2;
+				break;
+			case '÷':
+				if(iNum2){
+					iResult=iNum1/iNum2;
 				} else{
-					this.iNum1 = parseInt(this.temp.join(''));
+					iResult = '除数不能为0';
 				}
+				break;
+			default:
+				iResult=iNum2;	
+		}
+		return iResult;
+	 }
 
-				this.result = this.iNum1;
-			}			
-  	}
-  	return this.stack.join('');
+	handleNumberClick(n) {
+		switch(n.toString()){
+			case '=':
+				let result = this.operate(parseFloat(this.state.num1), parseFloat(this.state.value), this.state.per)
+				this.setState({
+					show:result,
+					temp : result,
+					value : 0,
+					num1:result,
+					NeedClear:true
+				});
+				break;
+			case '+':
+			case '-':
+			case '×':
+			case '÷':
+				
+				if(this.state.num1.length!=0)
+				{
+					 let result = this.operate(parseFloat(this.state.num1), parseFloat(this.state.value), n);
+				}
+				
+				this.setState({
+					num1: this.state.temp,
+					value:0,
+					per:n,
+					hasOperator: true,
+					NeedClear:true
+				});
 
-  }
-  handleClick(e) {
-  	e.preventDefault();
-  	const input = e.target.innerHTML
-  	this.setState({result:this.parser(input)});
+				break;
+			case '±':
+				if (this.state.value) return;
+				this.setState({
+					show:0,
+					value: 0,
+					temp : 0,
+					
+				});
+				break;
+			case '←':
+				this.setState({
+					show:0,
+					value: 0,
+					temp : 0,
+					num1:0,
+					per:'',
+					hasOperator: false,
+					NeedClear:false
+				});
+				break;		
+			case 'C':
+				this.setState({
+					show:0,
+					value: 0,
+					temp : 0,
+					num1:0,
+					per:'',
+					hasOperator: false,
+					NeedClear:false
+				});
+				break;
+			default:
+				let val;
+				if (n == '.'){
+					if((this.state.value).toString().indexOf('.') ==-1){
 
-    
-  }
+						val = this.state.value ? this.state.value.toString()+n: '0'+n;
+					} else{
+						val = this.state.value.toString();
+					}
+					
+				} else{
+					
+					val = this.state.value&&this.state.value!='0'? this.state.value.toString()+n :n;
+				}
+				if(this.state.NeedClear){
+					this.setState({
+						show:val,
+						value:val,
+						NeedClear:false,
+						temp:val
+					})
+				} else{
+					this.setState({
+						show:val,
+						value:val,
+						temp:val
 
-  render() {
-	  const listItems = this.state.keyboard.map((number) =>
-	    <li key={number.letter.toString()} onClick={this.handleClick} >
-	      {number.letter}
-	    </li>
-	  );
-    return (
-    	<div >
-    		<div className="screen">{this.state.result}</div>
-    		<ul>{listItems}</ul>
-    	</div>
-      
-    );
-  }
+					})
+				}			
+		}
+		
+	}
+
+	render() {
+		return (
+			<div className="wrap">
+				<input type="text" className="itxt" value={this.state.show} />
+				<CreateButton clickButton={this.handleNumberClick} />
+			</div>
+
+		)
+	}
 }
 
 ReactDOM.render(
-  <Count/>,
-  document.getElementById('caculator-container')
-)
+  <Calculator />,
+  document.getElementById('root')
+);

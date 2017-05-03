@@ -6,11 +6,11 @@ body {
   background-color: #c5dfe5;
   font-family: sans-serif;
 }
-#caculator-container{
+.wrap{
   width:450px;
   margin:50px auto;
 }
-.screen {
+.itxt {
     height: 41px;
     border-radius: 4px;
     font-size: 20px;
@@ -20,7 +20,7 @@ body {
     padding: 0 8px;
     overflow: hidden;
     background:#fff; 
-    width:392px; 
+    width:407px; 
   }
   ul{
     width:450px;

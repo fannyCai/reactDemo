@@ -5,11 +5,11 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(css|scss)$/,
-      //   exclude: /(node_modules)/,
-      //   use: ["style-loader", "css-loader?modules", "sass-loader"]
-      // },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /(node_modules)/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
