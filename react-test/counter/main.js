@@ -47,7 +47,6 @@ class Calculator extends React.Component{
 		this.handleNumberClick = this.handleNumberClick.bind(this);
 	}
 	operate(iNum1, iNum2, sOpr){
-		console.info(iNum1,iNum2,sOpr);
 		var iResult = 0;
 		switch(sOpr){
 			case '×':
