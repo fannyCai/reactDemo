@@ -44,10 +44,8 @@ class SearchBar extends React.Component{
 		this.state = {
 			value: '',
 			wrapClass:'dropdown',
-			
 			focus:false
-		};
-
+		}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleChangeList = this.handleChangeList.bind(this);
 
@@ -59,35 +57,29 @@ class SearchBar extends React.Component{
 		this.setState(
 		{
 			value: event.target.value,
-			wrapClass:'dropdown dropdown-active',
-			focus: false
-		
+			wrapClass:'dropdown dropdown-active'
+			
 		})
 	}
-	
 	handleChangeList(val){
 		console.info(val);
 		this.setState(
 		{
 			value: val,
-			wrapClass:'dropdown',
-			
+			wrapClass:'dropdown'
 		})
 		
 	}
 
 	inputOnFocus(){
 		this.setState({
-			wrapClass:'dropdown dropdown-active', 
-			focus: true 
+			wrapClass:'dropdown dropdown-active' 
 		});
 	}
 	 
 	//input 失去焦点
 	inputOnBlur(){
 		this.setState({
-			
-			focus: false
 		 });
 	}
 	render(){
