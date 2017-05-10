@@ -1,0 +1,69 @@
+*{
+	padding:0;
+	margin:0;
+}
+li{
+	list-style: none;
+}
+body{
+	font:14px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;
+	
+}
+.dropdown{
+	position:relative;
+	width:400px;
+	margin:40px auto;
+	border:1px solid #ddd;
+	
+	line-height: 30px;
+	height:30px;
+	.dropdown-toggle{
+		position: relative;
+		z-index: 3;
+		height:30px;
+		line-height: 30px;
+		
+		padding-left:10px;
+	}
+	.itxt{
+		position: absolute;
+		z-index: 2;
+		top:0;
+		left:0;
+		padding-left:10px;
+		width:100%;
+		border:0;
+		height:30px;
+		line-height: 30px;
+		outline: none;
+		background:none;
+	}
+	.dropdown-menu{
+		position: absolute;
+		display: none;
+		width:100%;
+		top:30px;
+		left:0;
+		line-height: 30px;
+		border:1px solid #ddd;
+		height:120px;
+		overflow-y:auto;
+		li{
+			padding-left:10px;
+			cursor: default;
+		}
+		
+	}
+
+}
+.dropdown-active{
+	.dropdown-toggle{
+		pointer-events:none
+	}
+	.dropdown-menu{
+		display: block;
+	}
+	.filtered{
+		display: none;
+	}
+}
